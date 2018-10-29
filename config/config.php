@@ -10,9 +10,11 @@
 |
 */
 
-$siteName = 'Pizza Store';
+$siteName = 'Webflix';
 
 // Page courante et titre de la balise title
 // $currentPageTitle = (empty($currentPageTitle)) ? null : $currentPageTitle;
 // Si REQUEST_URI vaut /home/toto/fichier.php, $page renverra fichier
 $currentPageUrl = basename($_SERVER['SCRIPT_FILENAME'], '.php');
+
+

@@ -1,6 +1,46 @@
 body > .container {
     padding: 60px 15px 0;
 }
+body{
+    font-family: 'Roboto', sans-serif;
+}
+
+
+.modal-header{
+    padding-bottom: 0;
+    background-color: #e74c3c;
+}
+
+.nav-tabs{
+    border: 0;
+}
+
+.connect a{
+    color: #fff;
+}
+
+
+.nav-tabs .nav-link:focus{
+    border: 0;
+}
+.nav-tabs .nav-link {
+    border: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .footer{
     position: sticky;
     bottom: 0;
