@@ -10,7 +10,18 @@ body{
     padding-bottom: 0;
     background-color: #e74c3c;
 }
+.navbar-brand{
+    text-transform: uppercase;
+    color: #c0392b !important;
+    font-weight: 700;
+}
 
+.navbar{
+    background-color: black;
+}
+.navbar a{
+    color: #fff;
+}
 .nav-tabs{
     border: 0;
 }
@@ -28,13 +39,45 @@ body{
 }
 
 
+.boxCard{
+    display: flex;
+    flex-direction: row;
+    color: black;
+}
+.imgSize{
+    padding: 0;
+}
+.center{
+    text-align: center;
+}
+.card-body h3{
+    font-size: 1.2rem;
+}
+.syno{
+    font-size: .8rem;
+}
 
+a:link{ 
+    text-decoration:none;     
+} 
+p{
+    margin: 0;
+}
+.date{
+    font-size: .8rem;
+}
 
-
-
-
-
-
+.card-img-top{
+    max-height: 331px;
+}
+.redirect{
+    position: absolute;
+    border-top: 1px solid grey;
+    bottom: 0;
+    width: 100%;
+    padding: .6rem;
+    margin-left: -1.2rem;
+}
 
 
 

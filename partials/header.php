@@ -4,7 +4,8 @@
   // Inclusion du fichier config
   require_once(__DIR__.'/../config/config.php');
   // Inclusion du fichier database
-  // require_once(__DIR__.'/../config/database.php');
+  require_once(__DIR__.'/../config/database.php');
+  
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +42,7 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-md">
       <a class="navbar-brand" href="index.php"><?php echo $siteName; ?></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-webflix">
         <span class="navbar-toggler-icon"></span>
