@@ -79,11 +79,20 @@ p{
     margin-left: -1.2rem;
 }
 
+/*-------Movies add------------------*/
+
+.add_movie{
+    margin-top: 2.5rem;
+    justify-content: center;
+    padding: 0;
+}
+
+.add_movie label + input, textarea{
+    margin-bottom: 1rem;
+}
 
 
-
-
-
+/*------------footer-----------------*/
 .footer{
     position: sticky;
     bottom: 0;
