@@ -3,7 +3,16 @@
 // title, description, categorie, date, iframutube, file
 $title = $description = $category = $date = $iframe = $extension = $file = $link =null;
 
-var_dump($_POST);
+if (empty($_POST)) {
+    http_response_code(404);?>
+    <h2 class='mt-5'>404 - Redirection dans 5 secondes</h2>
+    <span>Page introuvable</span>  
+    <script> setTimeout(() => {
+        window.location = 'index.php';
+    }, 5000);</script>
+
+    <?php die();
+}
 if (!empty($_POST)) {
     // Retourne l'emplacement du fichier
     $file = $_FILES['img']['tmp_name'];    
