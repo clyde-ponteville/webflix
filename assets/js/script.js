@@ -37,4 +37,24 @@ $(document).ready(function(){
         }
     })
 
+
+    var bg = $('#bg');
+    var imageUrl = $('iframe');
+
+    imageUrl = imageUrl.attr("src");
+
+    imageUrl = imageUrl.substr(30, 11);
+
+
+    bg.css({
+        "background":'url(https://img.youtube.com/vi/' + imageUrl + '/maxresdefault.jpg)',
+        "background-size": "cover",
+        "background-position": "center center"        
+    });
+    
+    
+    
+
+    console.log(bg);
+
 });

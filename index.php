@@ -10,8 +10,8 @@ require_once(__DIR__.'/partials/header.php'); ?>
                 $result = $query->fetchAll();
                 foreach ($result as $movie) { ?>
                     <div class="col-lg-6">
-                        <a href="#">
-                            <div class="card mb-4 boxCard"> 
+                        <a href="movie_single.php?title=<?= $movie['title']?>">
+                            <div class="card mb-4 boxCard box-shadow"> 
                                 <div class="col-lg-5 imgSize">               
                                     <img class='card-img-top' src='upload/cover/<?= $movie['cover'] ?>' alt="">
                                     <span class="" style= display:block></span>
