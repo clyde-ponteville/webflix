@@ -47,7 +47,7 @@ $(document).ready(function(){
 
 
     bg.css({
-        "background":'url(https://img.youtube.com/vi/' + imageUrl + '/maxresdefault.jpg)',
+        "background":'url(https://img.youtube.com/vi/' + imageUrl + '/sddefault.jpg)',
         "background-size": "cover",
         "background-position": "center center"        
     });
