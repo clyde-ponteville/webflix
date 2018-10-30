@@ -38,7 +38,7 @@ require_once(__DIR__.'/partials/header.php'); ?>
 
         </div>
 
-            <input class="btn btn-lg btn-success" type="submit" value="Ajouter un film">
+            <input class="btn btn-lg btn-success m-3" type="submit" value="Ajouter un film">
 
         </form>
         <?php   

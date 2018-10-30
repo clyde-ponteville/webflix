@@ -41,7 +41,7 @@
                     <tbody>
                 <?php foreach ($result as $movie) { ?>
                             <tr>
-                                <th scope="row"><?= $movie['title']?></th>
+                                <th scope="row"><?= ucfirst($movie['title'])?></th>
                                 <td><?= $movie['description']?></td>
                                 <td><?= $movie['video_link']?></td>
                                 <td><?= $movie['cover']?></td>

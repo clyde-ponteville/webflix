@@ -18,18 +18,18 @@ if (isset($_GET['id'])) {
 ?>
 
     <main class="container">
-        <h1>Ajouter un film</h1>
+        <h1>Modifier/Supprimer un film</h1>
         <!--  video-link, cover, date de sorti,-->
         <form class="row add_movie" method="post" enctype="multipart/form-data" action="movie_modify_post.php" >  
 
         <div class="col-lg-6 left">
             <label for="inputTitle" class="sr-only">Nom du film</label>
-            <input type="text" id="inputTitle" name="inputTitle" class="form-control" value="<?= ucfirst($dataMovie['title']) ?>" required autofocus>
+            <input type="text" id="inputTitle" name="inputTitle" class="form-control" placeholder="Titre du film" value="<?= ucfirst($dataMovie['title']) ?>" required autofocus>
             <label for="inputDesc" class="sr-only">Description</label>
-            <textarea id="inputDesc" name="inputDesc" class="form-control" required><?= $dataMovie['description']?></textarea>
+            <textarea id="inputDesc" name="inputDesc" class="form-control" rows="5" placeholder="Synopsis..." required><?= $dataMovie['description']?></textarea>
 
             <select class="custom-select" name="category" id="select_category" required>
-            <option value="<?= $dataMovie['category_id'] ?>" selected><?= ucfirst($dataCategory[$idCategory -1]['name']) ?></option>
+            <option disabled value="<?= $dataMovie['category_id'] ?>" selected><?= ucfirst($dataCategory[$idCategory -1]['name']) ?></option>
             <?php 
                 foreach ($dataCategory as $category) { ?>
                     <option value="<?= $category['id'] ?>"><?= ucfirst($category['name']) ?></option>
@@ -43,15 +43,17 @@ if (isset($_GET['id'])) {
             <input type="date" id="inputDate" name="inputDate" class="form-control" value="<?= $dataMovie['released_at'] ?>" required> 
 
             <label for="inputLink" class="sr-only">Lien iframe youtube</label>
-            <input type="text" id="inputLink" name="inputLink" class="form-control" value="<?= $dataMovie['video_link'] ?>" required>
+            <input type="text" id="inputLink" name="inputLink" class="form-control" placeholder="Iframe youtube" value="<?= $dataMovie['video_link'] ?>" required>
 
-            <label for="img">Image</label>
+            <label>Image actuel</label>
+            <input type="text" class="form-control" value="<?= $dataMovie['cover'] ?>" disabled>
+            <label for="img">Nouvelle image</label>
             <input name="img" type="file" class="form-control-file" required>
 
         </div>
 
-            <a class="btn btn-lg btn-primary" href="movie_modify_delete.php">Modifier un autre film</a>
-            <input class="btn btn-lg btn-success" type="submit" value="Modifier le film">            
+            <a class="btn btn-lg btn-primary m-3" href="movie_modify_delete.php">Modifier un autre film</a>
+            <input class="btn btn-lg btn-success m-3" type="submit" value="Update">            
 
 
         </form>
