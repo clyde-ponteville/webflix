@@ -151,6 +151,11 @@ p{
     max-height: 444px;
     max-width: 300px;
 }
+/**/
+
+.thsize{
+    width: 22%;
+}
 
 /*------------footer-----------------*/
 .footer{

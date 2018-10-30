@@ -56,6 +56,9 @@
           <li class="nav-item <?= ($currentPageUrl === 'movie_add') ? 'active' : ''; ?>">
             <a class="nav-link" href="movie_add.php">Ajouter un film</a>
           </li>
+          <li class="nav-item <?= ($currentPageUrl === 'movie_modify_delete') ? 'active' : ''; ?>">
+            <a class="nav-link" href="movie_modify_delete.php">Modifier/Supprimer</a>
+          </li>
         </ul>
         <div class="justify-content-end">
           <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalConnexion">Connexion</button>
