@@ -46,9 +46,9 @@ $(document).ready(function(){
     imageUrl = imageUrl.substr(30, 11);
 
 
-    bg.css({
+    bg.css({       
         "background":'url(https://img.youtube.com/vi/' + imageUrl + '/sddefault.jpg)',
-        "background-size": "cover",
+        backgroundSize: "cover",
         "background-position": "center center"        
     });
     

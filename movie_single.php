@@ -37,6 +37,7 @@
             </div>
         </div>
         <div class="position-relative" id="bg">
+        <div class="dotted-bg"></div>
             <div class="container d-flex flex-row py-4 index" >
                 <div class="col-lg-4">
                     <img class="cover-single" src="upload/cover/<?= $result['cover'] ?>" alt="cover <?= $result['title']?>">
