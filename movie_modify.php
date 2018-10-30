@@ -24,15 +24,13 @@ if (isset($_GET['id'])) {
 
         <div class="col-lg-6 left">
             <label for="inputTitle" class="sr-only">Nom du film</label>
-            <input type="text" id="inputTitle" name="inputTitle" class="form-control" value="<?= $dataMovie['title'] ?>" required autofocus>
+            <input type="text" id="inputTitle" name="inputTitle" class="form-control" value="<?= ucfirst($dataMovie['title']) ?>" required autofocus>
             <label for="inputDesc" class="sr-only">Description</label>
             <textarea id="inputDesc" name="inputDesc" class="form-control" required><?= $dataMovie['description']?></textarea>
 
             <select class="custom-select" name="category" id="select_category" required>
             <option value="<?= $dataMovie['category_id'] ?>" selected><?= ucfirst($dataCategory[$idCategory -1]['name']) ?></option>
             <?php 
-                
-
                 foreach ($dataCategory as $category) { ?>
                     <option value="<?= $category['id'] ?>"><?= ucfirst($category['name']) ?></option>
                 <?php }
@@ -42,17 +40,19 @@ if (isset($_GET['id'])) {
         </div>
         <div class="col-lg-6 right">
             <label for="inputDate" class="sr-only">Nom du film</label>
-            <input type="date" id="inputDate" name="inputDate" class="form-control" placeholder="Date de sortie" required> 
+            <input type="date" id="inputDate" name="inputDate" class="form-control" value="<?= $dataMovie['released_at'] ?>" required> 
 
             <label for="inputLink" class="sr-only">Lien iframe youtube</label>
-            <input type="text" id="inputLink" name="inputLink" class="form-control" placeholder="Lien iframe youtube" required>
+            <input type="text" id="inputLink" name="inputLink" class="form-control" value="<?= $dataMovie['video_link'] ?>" required>
 
             <label for="img">Image</label>
             <input name="img" type="file" class="form-control-file" required>
 
         </div>
 
-            <input class="btn btn-lg btn-success" type="submit" value="Modifier le film">
+            <a class="btn btn-lg btn-primary" href="movie_modify_delete.php">Modifier un autre film</a>
+            <input class="btn btn-lg btn-success" type="submit" value="Modifier le film">            
+
 
         </form>
         <?php   
