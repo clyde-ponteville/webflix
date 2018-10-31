@@ -36,7 +36,16 @@ $(document).ready(function(){
                 break;
         }
     })
+    
+    var pathname = window.location.pathname;
+    pathname = pathname.substr(15);
+    if (pathname == 'movie_single.php') {
+        bgYoutube();        
+    }
 
+});
+
+function bgYoutube(){
 
     var bg = $('#bg');
     var imageUrl = $('iframe');
@@ -50,11 +59,5 @@ $(document).ready(function(){
         "background":'url(https://img.youtube.com/vi/' + imageUrl + '/sddefault.jpg)',
         backgroundSize: "cover",
         "background-position": "center center"        
-    });
-    
-    
-    
-
-    console.log(bg);
-
-});
+    });    
+}
