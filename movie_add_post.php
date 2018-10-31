@@ -45,13 +45,11 @@ if (!empty($_POST)) {
         $errors['0'] = 'errTitle=title';
     }
     // Vérifier le lien youtube    
-    $link = stristr($iframe, 'src="https://www.youtube.com/');
-    
+    $link = stristr($iframe, 'src="https://www.youtube.com/');        
     //Pour insert bdd
-    $iLink = substr($link, 29,-77);
-    
-    $link = substr($link, 0,-88);
-    $compare = $link == 'src="https://www.youtube.com/embed/'; 
+    $iLink = substr($link, 29 ,17);        
+    $link = substr($link, 13 ,22);
+    $compare = $link == 'www.youtube.com/embed/'; 
 
     if (empty($iframe) || $compare == false) {
         $errors['1'] = 'errLink=link';

@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
     <main class="container">
         <h1>Modifier/Supprimer un film</h1>
         <!--  video-link, cover, date de sorti,-->
-        <form class="row add_movie" method="post" enctype="multipart/form-data" action="movie_modify_post.php" >  
+        <form class="row add_movie" method="post" enctype="multipart/form-data" action="movie_modify_post.php?id=<?= $dataMovie['id']?>" >  
 
         <div class="col-lg-6 left">
             <label for="inputTitle" class="sr-only">Nom du film</label>
@@ -29,11 +29,18 @@ if (isset($_GET['id'])) {
             <textarea id="inputDesc" name="inputDesc" class="form-control" rows="5" placeholder="Synopsis..." required><?= $dataMovie['description']?></textarea>
 
             <select class="custom-select" name="category" id="select_category" required>
-            <option disabled value="<?= $dataMovie['category_id'] ?>" selected><?= ucfirst($dataCategory[$idCategory -1]['name']) ?></option>
+            <option disabled>Choisissez votre catégorie</option>
             <?php 
-                foreach ($dataCategory as $category) { ?>
+                foreach ($dataCategory as $category) { 
+                    if ($category['id'] === $dataMovie['category_id']) { ?>
+                        <option selected value="<?= $category['id'] ?>"><?= ucfirst($category['name']) ?></option>
+                <?php
+                    } else{  
+                ?>
                     <option value="<?= $category['id'] ?>"><?= ucfirst($category['name']) ?></option>
-                <?php }
+                <?php
+                    } 
+                }
             ?>
         </select>
 
@@ -46,9 +53,9 @@ if (isset($_GET['id'])) {
             <input type="text" id="inputLink" name="inputLink" class="form-control" placeholder="Iframe youtube" value="<?= $dataMovie['video_link'] ?>" required>
 
             <label>Image actuel</label>
-            <input type="text" class="form-control" value="<?= $dataMovie['cover'] ?>" disabled>
+            <input type="text" class="form-control" name="nameOld" value="<?= $dataMovie['cover'] ?>" disabled>
             <label for="img">Nouvelle image</label>
-            <input name="img" type="file" class="form-control-file" required>
+            <input id="img" name="img" type="file" class="form-control-file">
 
         </div>
 
@@ -109,7 +116,7 @@ if (isset($_GET['id'])) {
                 case '0':
                 ?>
                     <div class="alert alert-danger" role="alert">
-                        La pizza n'a pas été ajouté !
+                        Le film n'a pas été modifié !
                     </div>
                 <?php
                     break;
@@ -117,7 +124,7 @@ if (isset($_GET['id'])) {
                 case '1':
                 ?>
                     <div class="alert alert-success" role="alert">
-                        Votre pizza a bien été ajouté ! ☺
+                        Votre film a bien été modifié ! ☺
                     </div>
                 <?php
                     break;
