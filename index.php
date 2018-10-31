@@ -1,8 +1,38 @@
 <?php
 // Le fichier header.php est inclus sur la page
-require_once(__DIR__.'/partials/header.php'); ?>
+require_once(__DIR__.'/partials/header.php'); 
+?>
 
     <main class="container">
+    <?php
+        if (isset($_GET['done'])) {            
+            $done = $_GET['done'];            
+            switch ($done) {
+                case '0':
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        Votre compte n'a pas été crée !
+                    </div>
+                <?php
+                    break;
+
+                case '1':
+                ?>
+                    <div class="alert alert-success" role="alert">
+                        Votre compte a bien été crée ! ☺
+                    </div>
+                <?php
+                    break;
+                case '2':
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        Le mot de passe ou l'email est incorrect
+                    </div>
+                <?php
+                    break;
+                    
+            }            
+        }?>
         <h1>Listes des films</h1>
         <div class="row">
             <?php 
@@ -10,7 +40,7 @@ require_once(__DIR__.'/partials/header.php'); ?>
                 $result = $query->fetchAll();
                 foreach ($result as $movie) { ?>
                     <div class="col-lg-6">
-                        <a href="movie_single.php?title=<?= $movie['title']?>">
+                        <a id="boxMovie" href="movie_single.php?title=<?= $movie['title']?>">
                             <div class="card mb-4 boxCard box-shadow"> 
                                 <div class="col-lg-5 imgSize">               
                                     <img class='card-img-top' src='upload/cover/<?= $movie['cover'] ?>' alt="">

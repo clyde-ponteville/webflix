@@ -87,7 +87,18 @@ p{
 .box-shadow:hover{
     box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.75);
 }
-
+.dropdown{
+    margin-left: 2rem;
+}
+.dropdown-menu{
+    right: -1.1rem;
+    left: auto;
+    background-color: #000;
+}
+.deco{
+    margin: .25rem 1.5rem;
+    padding: .25rem 1.5rem;
+}
 /*-------Movies add------------------*/
 
 .add_movie{
@@ -142,7 +153,7 @@ p{
     z-index: 0;
     position: absolute; 
 }
-       
+
 
 #bg::after{
     content: "";
