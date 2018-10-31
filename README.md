@@ -18,6 +18,7 @@ Pages:
 - Modifier un film (movie_edit.php?id=4) -> On peut modifié un film
 - Supprimer un film (movie_delete.php?id=4) -> On peut supprimé un film. On doit avoir un bouton supprimer sur la liste des films
 on clique, on supprime le film en question et on revient sur la liste
+
 - Film random (movie_random.php) -> On affiche 4 films aléatoires
 
 --- PARTIE 3 ---

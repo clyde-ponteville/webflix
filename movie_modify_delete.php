@@ -3,8 +3,29 @@
 ?>
 
 <!-- Begin page content -->
-<main class="container-fluid d-flex flex-column p-5">    
+<main class="container-fluid d-flex flex-column p-5">
+    
         <?php 
+        if (isset($_GET['done'])) {            
+            $done = $_GET['done'];            
+            switch ($done) {
+                case '0':
+                ?>
+                    <div class="alert alert-danger" role="alert">
+                        Le film n'a pas été supprimé !
+                    </div>
+                <?php
+                    break;
+
+                case '1':
+                ?>
+                    <div class="alert alert-success" role="alert">
+                        Votre film a bien été supprimé ! ☺
+                    </div>
+                <?php
+                    break;
+            }            
+        }
                 
                 $query = $db->prepare('SELECT *,movie.id idMovie ,category.name category FROM movie 
                                         INNER JOIN category 
@@ -50,7 +71,7 @@
                                 <td>
                                     <a class="badge badge-primary" href="movie_modify.php?id=<?= $movie['idMovie'] ?>">Modifier</a>
                                 </td>
-                                <td><a class="badge badge-danger" href="">Supprimer</a></td>
+                                <td><a class="badge badge-danger" href="movie_delete_post.php?id=<?= $movie['idMovie'] ?>">Supprimer</a></td>
 
                             </tr>
                             
