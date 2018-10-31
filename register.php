@@ -21,7 +21,9 @@ $pwdCo = $_POST['inputCoPwd'];
 // Hachage de mot de passe selon l'algorithme bcrypt
 $password = password_hash($pwd, PASSWORD_DEFAULT);
 // Retourne true ou false si correspondance
-$verify = password_verify($pwdCo, $password); 
+$verify = password_verify($pwdCo, $password);
+
+//voir si l'email existe déjà dans la bdd
 
 if ($verify == true) {    
     $createUser = $db->prepare('INSERT INTO user (username, email, password) VALUES (:user, :email, :pwd)');
