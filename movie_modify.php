@@ -2,6 +2,7 @@
 // Le fichier header.php est inclus sur la page
 require_once(__DIR__.'/partials/header.php'); 
 
+
 if (isset($_GET['id'])) {
     
     $id = $_GET['id'];
@@ -12,12 +13,22 @@ if (isset($_GET['id'])) {
     $dataCategory = $getCategory->fetchAll();
 
     $idCategory = $dataMovie['category_id'];
-    
+        
 }
 
 ?>
 
     <main class="container">
+    <?php if (!isset($_GET['id']) || count($dataMovie) == 1 || empty($_SESSION)) {
+    http_response_code(404);?>
+    <h2 class='mt-5'>404 - Redirection dans 5 secondes</h2>
+    <span>Page introuvable</span>  
+    <script> setTimeout(() => {
+        window.location = 'index.php';
+    }, 5000); </script>
+
+    <?php die();
+        }?>
         <h1>Modifier/Supprimer un film</h1>
         <!--  video-link, cover, date de sorti,-->
         <form class="row add_movie" method="post" enctype="multipart/form-data" action="movie_modify_post.php?id=<?= $dataMovie['id']?>" >  

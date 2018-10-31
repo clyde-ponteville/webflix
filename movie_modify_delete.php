@@ -1,11 +1,13 @@
 <?php 
-    require(__DIR__.'/partials/header.php');    
+    require(__DIR__.'/partials/header.php');
+        
 ?>
 
 <!-- Begin page content -->
 <main class="container-fluid d-flex flex-column p-5">
     
         <?php 
+    if (!empty($_SESSION)) {
         if (isset($_GET['done'])) {            
             $done = $_GET['done'];            
             switch ($done) {
@@ -80,7 +82,17 @@
                 </table>
     
 
+    <?php }else{
+        http_response_code(404);?>
+        <h2 class='mt-5'>404 - Redirection dans 5 secondes</h2>
+        <span>Page introuvable</span>  
+        <script> setTimeout(() => {
+            window.location = 'index.php';
+        }, 5000); </script>
     
+        <?php die();
+    }
+    ?>
 </main>
 
 <?php require(__DIR__.'/partials/footer.php'); ?>

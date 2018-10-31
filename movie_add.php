@@ -1,8 +1,9 @@
 <?php
 // Le fichier header.php est inclus sur la page
-require_once(__DIR__.'/partials/header.php'); ?>
-
+require_once(__DIR__.'/partials/header.php'); 
+?>
     <main class="container">
+    <?php if (!empty($_SESSION)) {?>
         <h1>Ajouter un film</h1>
         <!--  video-link, cover, date de sorti,-->
         <form class="row add_movie" method="post" enctype="multipart/form-data" action="movie_add_post.php" >  
@@ -110,8 +111,20 @@ require_once(__DIR__.'/partials/header.php'); ?>
         }
         
 
-    ?>
+    }else{
+    http_response_code(404);?>
+    <h2 class='mt-5'>404 - Redirection dans 5 secondes</h2>
+    <span>Page introuvable</span>  
+    <script> setTimeout(() => {
+        window.location = 'index.php';
+    }, 5000); </script>
+
+    <?php die();
+}
+?>
     </main>
+
+
 
 <?php
 // Le fichier footer.php est inclus sur la page
