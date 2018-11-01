@@ -49,7 +49,7 @@
       </button>
 
       <div class="collapse navbar-collapse" id="navbar-webflix">
-        <ul class="navbar-nav mr-auto">        
+        <ul class="navbar-nav mr-auto col-lg-4">        
             <li class="nav-item <?php echo ($currentPageUrl === 'index') ? 'active' : ''; ?>">
               <a class="nav-link" href="index.php">Accueil</a>
             </li>           
@@ -62,7 +62,14 @@
             </li>
           <?php } ?>
         </ul>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-center col-lg-4">
+          <form class="form-inline" method="post" action="movie_search.php">
+            <input class="form-control mr-sm-2" type="search" placeholder="Titre" name="search" aria-label="Search" required>
+            <input class="form-control mr-sm-2" type="number" placeholder="Année" min="1900" name="year">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </div>
+        <div class="d-flex justify-content-end col-lg-4">
         <?php 
         if(empty($_SESSION)) { ?>
           <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#modalConnexion">Connexion</button>          

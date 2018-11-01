@@ -28,7 +28,16 @@
                     }, 5000);</script>
 
                     <?php die();
-                } 
+                }
+                
+                $isLocal = file_exists("upload/cover/".$result['cover']);
+                    if ($isLocal == false) {
+                        $cover = "https://image.tmdb.org/t/p/w500".$result['cover'];                        
+                    }else{
+                        $cover = "upload/cover/".$result['cover'];
+                                              
+                    }     
+                
             }
         ?>
         <div class="video">
@@ -40,7 +49,7 @@
         <div class="dotted-bg"></div>
             <div class="container d-flex flex-row py-4 index" >
                 <div class="col-lg-4">
-                    <img class="cover-single" src="upload/cover/<?= $result['cover'] ?>" alt="cover <?= $result['title']?>">
+                    <img class="cover-single" src="<?= $cover ?>" alt="cover <?= $result['title']?>">
                 </div>
                 <div class="col-lg-8 boxinfo">
                     <h2 class="text-center"><?= ucfirst($result['title']) ?></h2>

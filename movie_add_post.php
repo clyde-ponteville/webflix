@@ -1,7 +1,7 @@
 <?php
 // Traitement du formulaire
 // title, description, categorie, date, iframutube, file
-$title = $description = $category = $date = $iframe = $extension = $file = $link =null;
+$title = $description = $category = $date = $iframe = $extension = $file = $link = $compare =null;
 
 if (empty($_POST)) {
     http_response_code(404);?>
@@ -14,20 +14,26 @@ if (empty($_POST)) {
     <?php die();
 }
 if (!empty($_POST)) {
-    // Retourne l'emplacement du fichier
-    $file = $_FILES['img']['tmp_name'];    
-    
-    // Récupère le nom du fichier
-    $originalName = $_FILES['img']['name'];    
-    
-    // Récupère l'extension du fichier
-    $extension = pathinfo($originalName)['extension'];
-    
-    // Renomme le fichier
-    $md5 = md5($originalName.uniqid());
-    $filename = $md5.'.'.$extension;    
+
+    if (!empty($_POST['imgCover'])) {
+        $cover = $_POST['imgCover'];
+    }else{
+        // Retourne l'emplacement du fichier
+        $file = $_FILES['img']['tmp_name'];    
+        
+        // Récupère le nom du fichier
+        $originalName = $_FILES['img']['name'];    
+        
+        // Récupère l'extension du fichier
+        $extension = pathinfo($originalName)['extension'];
+        
+        // Renomme le fichier
+        $md5 = md5($originalName.uniqid());
+        $filename = $md5.'.'.$extension;
+    }
 
     require_once(__DIR__.'/config/database.php');
+    
 
     $title = $_POST['inputTitle'];
     $description = $_POST['inputDesc'];
@@ -44,26 +50,34 @@ if (!empty($_POST)) {
     if (empty($title)) {
         $errors['0'] = 'errTitle=title';
     }
-    // Vérifier le lien youtube    
-    $link = stristr($iframe, 'src="https://www.youtube.com/');        
-    //Pour insert bdd
-    $iLink = substr($link, 29 ,17);        
-    $link = substr($link, 13 ,22);
-    $compare = $link == 'www.youtube.com/embed/'; 
-
-    if (empty($iframe) || $compare == false) {
-        $errors['1'] = 'errLink=link';
-    }
-
     
-    // Vérifier l'image
-    $finfo = finfo_open(FILEINFO_MIME_TYPE); // Permet d'ouvrir un fichier
-    $mimeType = finfo_file($finfo, $file); // ouvre le fichier et renvoie image/jpg
-    $allowedExtensions = ['image/jpg','image/jpeg','image/png','image/gif'];
-
-    if (!in_array($mimeType, $allowedExtensions)) {
-        $errors['2'] = 'errImg=image';
+    
+    $verifEmbed = explode('/', $iframe);
+    if($verifEmbed['0'] !== 'embed'){        
+        // Vérifier le lien youtube    
+        $link = stristr($iframe, 'src="https://www.youtube.com/');        
+        //Pour insert bdd
+        $iLink = substr($link, 29 ,17);        
+        $link = substr($link, 13 ,22);
+        $compare = $link == 'www.youtube.com/embed/';        
+        if (empty($iframe) || $compare == false) {
+            $errors['1'] = 'errLink=link';
+        }    
+    }else{
+        $iLink = $iframe;
     }
+       
+    if (empty($cover)) {
+        // Vérifier l'image
+        $finfo = finfo_open(FILEINFO_MIME_TYPE); // Permet d'ouvrir un fichier
+        $mimeType = finfo_file($finfo, $file); // ouvre le fichier et renvoie image/jpg
+        $allowedExtensions = ['image/jpg','image/jpeg','image/png','image/gif'];
+
+        if (!in_array($mimeType, $allowedExtensions)) {
+            $errors['2'] = 'errImg=image';
+        }
+    }
+
 
     //Vérifier la taille du fichier
     $filesize = filesize($file) / 1024;
@@ -90,10 +104,12 @@ if (!empty($_POST)) {
 
     if (empty($errors)) {
         
-        if (isset($title) && isset($iframe) && isset($description) && is_numeric($category) && isset($extension) && isset($date)) {
+        if (isset($title) && isset($iframe) && isset($description) && is_numeric($category) && isset($date)) {
 
             // Déplace le fichier vers un répertoire
-            move_uploaded_file($file, __DIR__.'/upload/cover/'.$filename);
+            if (!isset($cover)) {                
+                move_uploaded_file($file, __DIR__.'/upload/cover/'.$filename);
+            }
         
             $addMovie = $db->prepare("INSERT INTO movie (title, description, video_link, cover ,released_at, category_id) 
                                         VALUES (:title, :description, :video_link, :cover, :released_at, :category)"); 
@@ -101,7 +117,7 @@ if (!empty($_POST)) {
             $addMovie->bindValue(':title', $title, PDO::PARAM_STR);
             $addMovie->bindValue(':description', $description, PDO::PARAM_STR);
             $addMovie->bindValue(':video_link', $iLink, PDO::PARAM_STR);
-            $addMovie->bindValue(':cover', $filename, PDO::PARAM_STR);
+            $addMovie->bindValue(':cover', $filename ?? $cover, PDO::PARAM_STR);
             $addMovie->bindValue(':released_at', $date, PDO::PARAM_STR);
             $addMovie->bindValue(':category', $category, PDO::PARAM_INT);            
             $addMovie->execute();     

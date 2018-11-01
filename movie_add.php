@@ -1,41 +1,69 @@
 <?php
 // Le fichier header.php est inclus sur la page
 require_once(__DIR__.'/partials/header.php'); 
+require_once(__DIR__.'/movie_search.php');
+
+// $title, $desc,  $cover : https://image.tmdb.org/t/p/w500/bXs0zkv2iGVViZEy78teg2ycDBm.jpg ,$date, $category,  $linkYoutube
 ?>
     <main class="container">
-    <?php if (!empty($_SESSION)) {?>
+    <?php if (!empty($_SESSION)) {
+        global $category;
+        $getCategory = $db->query('SELECT id FROM category WHERE name = '. $db->quote($category));            
+        $dataCategory = $getCategory->fetch();
+        $idCategory = $dataCategory['id'];
+        
+        ?>
         <h1>Ajouter un film</h1>
         <!--  video-link, cover, date de sorti,-->
         <form class="row add_movie" method="post" enctype="multipart/form-data" action="movie_add_post.php" >  
 
         <div class="col-lg-6 left">
             <label for="inputTitle" class="sr-only">Nom du film</label>
-            <input type="text" id="inputTitle" name="inputTitle" class="form-control" placeholder="Nom du film" required autofocus>
+            <input type="text" id="inputTitle" name="inputTitle" class="form-control" placeholder="Nom du film" required autofocus value="<?= $title ?? "" ?>">
             <label for="inputDesc" class="sr-only">Description</label>
-            <textarea id="inputDesc" name="inputDesc" class="form-control" placeholder="Synopsis" required></textarea>
+            <textarea id="inputDesc" name="inputDesc" class="form-control" placeholder="Synopsis" required><?= $desc ?? "" ?></textarea>
 
             <select class="custom-select" name="category" id="select_category" required>
-            <option selected>Choisissez la categorie</option>
+            <option>Choisissez la categorie</option>
             <?php 
                 $getCategory = $db->query('SELECT * FROM category');            
                 $dataCategory = $getCategory->fetchAll();
-
-                foreach ($dataCategory as $category) { ?>
+                
+                 foreach ($dataCategory as $category) { 
+                    if ($category['id'] === $idCategory) { ?>
+                        <option selected value="<?= $category['id'] ?>"><?= ucfirst($category['name']) ?></option>
+                <?php
+                    } else{  
+                ?>
                     <option value="<?= $category['id'] ?>"><?= ucfirst($category['name']) ?></option>
-                <?php }
+                <?php
+                    } 
+                }
             ?>
         </select>
 
         </div>
         <div class="col-lg-6 right">
-            <label for="inputDate" class="sr-only">Nom du film</label>
-            <input type="date" id="inputDate" name="inputDate" class="form-control" placeholder="Date de sortie" required> 
+            <label for="inputDate" class="sr-only">Date de sortie</label>
+            <input type="date" id="inputDate" name="inputDate" class="form-control" placeholder="Date de sortie" required value="<?= $date ?? "" ?>"> 
 
             <label for="inputLink" class="sr-only">Lien iframe youtube</label>
-            <input type="text" id="inputLink" name="inputLink" class="form-control" placeholder="Lien iframe youtube" required>
+            <input type="text" id="inputLink" name="inputLink" class="form-control" placeholder="Lien iframe youtube" required value="<?= ($linkYoutube) ?? "" ?>">
+            
+            <?php   
+                if (!empty($cover)) { ?>
+                    
+                    <label for="urlImg">L'image sera une url internet</label>
+                    <input name="imgCover" type="text" class="form-control" style="display:none;" value="<?= $cover ?>">
+                <?php }else{ ?>
 
-            <label for="img">Image</label>
-            <input name="img" type="file" class="form-control-file" required>
+                    <label for="img">Image</label>
+                    <input name="img" type="file" class="form-control-file" required>
+
+                <?php }
+            
+            ?>
+
 
         </div>
 
@@ -94,7 +122,7 @@ require_once(__DIR__.'/partials/header.php');
                 case '0':
                 ?>
                     <div class="alert alert-danger" role="alert">
-                        La pizza n'a pas été ajouté !
+                        Votre film n'a pas été ajouté !
                     </div>
                 <?php
                     break;
@@ -102,7 +130,7 @@ require_once(__DIR__.'/partials/header.php');
                 case '1':
                 ?>
                     <div class="alert alert-success" role="alert">
-                        Votre pizza a bien été ajouté ! ☺
+                        Votre film a bien été ajouté ! ☺
                     </div>
                 <?php
                     break;

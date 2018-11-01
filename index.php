@@ -38,12 +38,21 @@ require_once(__DIR__.'/partials/header.php');
             <?php 
                 $query = $db->query('SELECT * FROM movie');            
                 $result = $query->fetchAll();
-                foreach ($result as $movie) { ?>
+                foreach ($result as $movie) {
+                    $isLocal = file_exists("upload/cover/".$movie['cover']);
+                    if ($isLocal == false) {
+                        $cover = "https://image.tmdb.org/t/p/w500".$movie['cover'];                        
+                    }else{
+                        $cover = "upload/cover/".$movie['cover'];
+                                              
+                    }                 
+                    
+                    ?>
                     <div class="col-lg-6">
                         <a id="boxMovie" href="movie_single.php?title=<?= $movie['title']?>">
                             <div class="card mb-4 boxCard box-shadow"> 
                                 <div class="col-lg-5 imgSize">               
-                                    <img class='card-img-top' src='upload/cover/<?= $movie['cover'] ?>' alt="">
+                                    <img class='card-img-top' src="<?= $cover ?>" alt="<?= "cover du film ".$movie['title']?>">
                                     <span class="" style= display:block></span>
                                 </div>
                                 <div class="col-lg-7 card-body"> 
