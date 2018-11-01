@@ -3,7 +3,6 @@
 require_once(__DIR__.'/partials/header.php'); 
 require_once(__DIR__.'/movie_search.php');
 
-// $title, $desc,  $cover : https://image.tmdb.org/t/p/w500/bXs0zkv2iGVViZEy78teg2ycDBm.jpg ,$date, $category,  $linkYoutube
 ?>
     <main class="container">
     <?php if (!empty($_SESSION)) {
