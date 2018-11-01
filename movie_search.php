@@ -13,6 +13,9 @@ if (empty($_POST)) {
 if ($_SERVER['SCRIPT_FILENAME'] != $uri) {
 
     $query = $_POST['search'];
+    if(empty($query)){
+        isExist();
+    }
     $year = $_POST['year'] ?? null;
     
     if (!empty($year)) {
