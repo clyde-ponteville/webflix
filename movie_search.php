@@ -6,6 +6,9 @@
 
 $uri = __DIR__.'/movie_add.php';
 $uri = str_replace("\\", "/", $uri);
+if (empty($_POST)) {
+    isExist();
+}
 
 if ($_SERVER['SCRIPT_FILENAME'] != $uri) {
 
